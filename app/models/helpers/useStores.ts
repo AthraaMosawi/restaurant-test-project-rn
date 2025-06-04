@@ -2,6 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { RootStore, RootStoreModel } from "../RootStore"
 import { setupRootStore } from "./setupRootStore"
 
+import { FoodStore } from "../FoodStore"
+
+
 /**
  * Create the initial (empty) global RootStore instance here.
  *
@@ -14,7 +17,12 @@ import { setupRootStore } from "./setupRootStore"
  * very large), you may want to use a different strategy than immediately
  * instantiating it, although that should be rare.
  */
-const _rootStore = RootStoreModel.create({})
+const _rootStore = RootStoreModel.create({
+  foodStore: FoodStore.create({
+    foods: [],
+    isLoading: false,
+  }),
+})
 
 /**
  * The RootStoreContext provides a way to access

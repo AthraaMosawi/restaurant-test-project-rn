@@ -1,10 +1,17 @@
 import { Instance, SnapshotOut, types } from "mobx-state-tree"
-
+import { FoodStore } from "./FoodStore"
 /**
  * A RootStore model.
  */
-export const RootStoreModel = types.model("RootStore").props({})
-
+export const RootStoreModel = types.model("RootStore").props({
+    foodStore: FoodStore,
+})
+export const rootStore = RootStoreModel.create({
+  foodStore: FoodStore.create({
+    foods: [],
+    isLoading: false,
+  }),
+})
 /**
  * The RootStore instance.
  */

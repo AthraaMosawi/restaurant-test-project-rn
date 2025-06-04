@@ -37,6 +37,7 @@ export class Api {
         Accept: "application/json",
       },
     })
+    console.log("Base API URL:", this.config.url)
   }
 }
 

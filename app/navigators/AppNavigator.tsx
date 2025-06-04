@@ -12,7 +12,8 @@ import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useAppTheme, useThemeProvider } from "@/utils/useAppTheme"
 import { ComponentProps } from "react"
-
+import { FoodModel } from "../models/FoodModel"
+import { Instance } from 'mobx-state-tree';
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
  * as well as what properties (if any) they might take when navigating to them.
@@ -26,10 +27,16 @@ import { ComponentProps } from "react"
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
+
+type Food = Instance<typeof FoodModel>
+
 export type AppStackParamList = {
   Welcome: undefined
   // 🔥 Your screens go here
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Menu:undefined
+  Item: { item: Food }
+  CategoryDetails: { category: string }
 }
 
 /**
@@ -64,6 +71,9 @@ const AppStack = observer(function AppStack() {
       <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
       {/** 🔥 Your screens go here */}
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="Menu" component={Screens.MenuScreen} />
+      <Stack.Screen name="Item" component={Screens.ItemDetails} />
+      <Stack.Screen name="CategoryDetails" component={Screens.CategoryDetails} />
     </Stack.Navigator>
   )
 })
