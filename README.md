@@ -19,11 +19,17 @@ Centralized Header: A consistent navigation header across all screens, handling 
 ### Technologies Used
 
 React Native: Cross-platform mobile development framework.
+
 Expo: Framework for universal React applications.
+
 MobX-State-Tree (MST): For robust and scalable state management.
+
 React Navigation: For powerful navigation between app screens.
+
 AsyncStorage: For local data persistence (e.g., shopping cart data).
+
 TypeScript: For type-safe JavaScript development.
+
 APIsauce: For streamlined API interactions.
 
 ### Getting Started
@@ -33,34 +39,51 @@ Follow these steps to get a local copy of the project up and running on your mac
 ### Prerequisites
 
 Node.js & npm/Yarn: Ensure you have Node.js (and npm, which comes with Node.js) or Yarn installed.
+
 Node.js Download
+
 Yarn Installation
+
 Expo CLI: Install the Expo CLI globally.
+
 Bash
 
 npm install -g expo-cli # or yarn global add expo-cli
+
 Android Studio / Xcode: For running on emulators/simulators or physical devices.
+
 Installation
+
 Clone the repository:
+
 Bash
 
 git clone https://github.com/AthraaMosawi/restaurant-test-project-rn.git
+
 cd your-project-name # Replace with your project's actual folder name
+
 Install dependencies:
+
 Bash
 
 npm install # or yarn install
+
 Running the App
+
 Start the development server:
 
 Bash
 
 npm start # or expo start
+
 This will open the Expo Dev Tools in your browser.
 
 ### Choose how to run:
 
 iOS Simulator: Press i in the terminal or click "Run on iOS simulator" in the Expo Dev Tools.
+
 Android Emulator: Press a in the terminal or click "Run on Android device/emulator" in the Expo Dev Tools.
+
 Web Browser: Press w in the terminal or click "Run in web browser" in the Expo Dev Tools.
+
 Physical Device: Scan the QR code from the terminal or Expo Dev Tools using the Expo Go app on your phone.
