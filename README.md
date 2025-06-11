@@ -4,11 +4,16 @@ A mobile food ordering application built with React Native, allowing users to br
 
 ### Features
 
-Browse Categories: Explore various food categories like Burgers, Breads, Desserts, and more.< br / >
+Browse Categories: Explore various food categories like Burgers, Breads, Desserts, and more.
+
 View Menu Items: See detailed information for each food item, including price, description, and ratings.
+
 Menu Cart: Add items to your cart, adjust quantities, and remove items.
+
 Persistent Cart: Your cart contents are saved locally using AsyncStorage and reloaded on app launch.
+
 Global Food Catalog: Efficiently manage a central, in-memory catalog of all food items using MobX-State-Tree Maps for quick lookups across different screens.
+
 Centralized Header: A consistent navigation header across all screens, handling back navigation and cart access.
 
 ### Technologies Used
