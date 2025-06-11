@@ -22,7 +22,7 @@ const ROOT_STATE_STORAGE_KEY = "root-v1"
  * Setup the root state.
  */
 let _disposer: IDisposer | undefined
-export async function setupRootStore(rootStore: RootStore) {
+export async function setupRootStore(rootStore: RootStore, shouldResetStore: boolean | undefined) {
   let restoredState: RootStoreSnapshot | undefined | null
 
   try {

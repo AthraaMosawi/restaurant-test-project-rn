@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { View, FlatList, Image, TouchableOpacity, ScrollView } from "react-native"
+import { View, FlatList, Image, TouchableOpacity } from "react-native"
 import { Text, Screen } from "@/components"
 import { $styles } from "@/theme"
 import { AppStackScreenProps } from "../navigators"
@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native"
 import { styles } from "./WelcomeScreen"
 import { StyleSheet } from "react-native"
 import { Header } from "@/components"
-import { PressableIcon } from "@/components/Icon"
+import { useStores } from "@/models"
 
 
 type MenuScreenProps = AppStackScreenProps<"Menu">
@@ -35,24 +35,12 @@ const logo = require("../../assets/images/good-food-logo-b.png")
 export const MenuScreen = observer(function MenuScreen(_props: MenuScreenProps) {
 
   const navigation = useNavigation<AppStackScreenProps<"Menu">["navigation"]>()
+  const { cartStore } = useStores()
+
 
   return (
     <Screen preset="fixed" contentContainerStyle={$styles.flex1}>
       <View style={styles.container}>
-        <Header
-          titleMode="center"
-          LeftActionComponent={
-            <PressableIcon icon="back" size={24} onPress={() => navigation.push("Welcome")} />
-          }
-          RightActionComponent={
-            <PressableIcon icon="cart" size={24} onPress={() => alert("Not Yet :(")} />
-          }
-          title="Categories"
-          titleContainerStyle={{ alignItems: "center", justifyContent: "center" }}
-          titleStyle={{ display: "flex" }}
-          style={{ height: 56 }}
-          containerStyle={{ paddingHorizontal: 16 }}
-        />
         <View style={cateStyles.header}>
           <Image source={logo} style={{ width: 130, height: 70 }} resizeMode="contain"/>
         </View>

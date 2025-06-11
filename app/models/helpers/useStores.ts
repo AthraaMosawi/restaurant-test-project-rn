@@ -2,9 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { RootStore, RootStoreModel } from "../RootStore"
 import { setupRootStore } from "./setupRootStore"
 
-import { FoodStore } from "../FoodStore"
-
-
 /**
  * Create the initial (empty) global RootStore instance here.
  *
@@ -18,10 +15,10 @@ import { FoodStore } from "../FoodStore"
  * instantiating it, although that should be rare.
  */
 const _rootStore = RootStoreModel.create({
-  foodStore: FoodStore.create({
-    foods: [],
+  foodStore: {
+    foods: {},
     isLoading: false,
-  }),
+  },
 })
 
 /**
@@ -57,7 +54,7 @@ export const useStores = () => useContext(RootStoreContext)
  * @param {() => void | Promise<void>} callback - an optional callback that's invoked once the store is ready
  * @returns {object} - the RootStore and rehydrated state
  */
-export const useInitialRootStore = (callback?: () => void | Promise<void>) => {
+export const useInitialRootStore = (callback?: () => void | Promise<void>, p0?: { shouldResetStore: boolean }) => {
   const rootStore = useStores()
   const [rehydrated, setRehydrated] = useState(false)
 
@@ -66,7 +63,7 @@ export const useInitialRootStore = (callback?: () => void | Promise<void>) => {
     let _unsubscribe: () => void | undefined
     ;(async () => {
       // set up the RootStore (returns the state restored from AsyncStorage)
-      const { unsubscribe } = await setupRootStore(rootStore)
+      const { unsubscribe } = await setupRootStore(rootStore, p0?.shouldResetStore)
       _unsubscribe = unsubscribe
 
       // reactotron integration with the MST root store (DEV only)

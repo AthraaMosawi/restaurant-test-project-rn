@@ -8,4 +8,5 @@ export const FoodModel = types.model("Food", {
   price: types.number,
   rate: types.number,
   country: types.string,
+  category: types.string,
 })

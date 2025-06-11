@@ -14,6 +14,8 @@ import { useAppTheme, useThemeProvider } from "@/utils/useAppTheme"
 import { ComponentProps } from "react"
 import { FoodModel } from "../models/FoodModel"
 import { Instance } from 'mobx-state-tree';
+import CartIcon from "@/components/CartIcon"
+import * as Linking from "expo-linking" 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
  * as well as what properties (if any) they might take when navigating to them.
@@ -35,8 +37,9 @@ export type AppStackParamList = {
   // 🔥 Your screens go here
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
   Menu:undefined
-  Item: { item: Food }
+  Item: { categoryName: string; itemId: string }
   CategoryDetails: { category: string }
+  Cart: undefined
 }
 
 /**
@@ -60,20 +63,53 @@ const AppStack = observer(function AppStack() {
 
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
+      screenOptions={({ navigation }) => ({
+        headerShown: true, 
         navigationBarColor: colors.background,
         contentStyle: {
           backgroundColor: colors.background,
         },
-      }}
+        headerStyle: {
+          backgroundColor: "#190F16", 
+          height: 56, 
+        },
+        headerTintColor: "#FFFFFF",
+        headerTitleAlign: "center",
+        headerTitleStyle: {
+          fontWeight: "bold",
+          display: "flex",
+        },
+        headerRight: () => <CartIcon onPress={() => navigation.navigate("Cart")} />,
+      })}
     >
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
+
+      <Stack.Screen
+        name="Welcome"
+        component={Screens.WelcomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Menu"
+        component={Screens.MenuScreen}
+        options={{ title: "Categories" }}
+      />
+      <Stack.Screen
+        name="Item"
+        component={Screens.ItemDetails}
+        options={{ title: "Item Details" }}
+      />
+      <Stack.Screen
+        name="CategoryDetails"
+        component={Screens.CategoryDetails}
+        options={({ route }) => ({ title: route.params.category })}
+      />
+      <Stack.Screen
+        name="Cart"
+        component={Screens.CartScreen}
+        options={{ title: "Your Cart" }}
+      />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
-      <Stack.Screen name="Menu" component={Screens.MenuScreen} />
-      <Stack.Screen name="Item" component={Screens.ItemDetails} />
-      <Stack.Screen name="CategoryDetails" component={Screens.CategoryDetails} />
+      {/* Add all your other screens here */}
     </Stack.Navigator>
   )
 })
@@ -87,9 +123,22 @@ export const AppNavigator = observer(function AppNavigator(props: NavigationProp
 
   useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
 
+  const linking = {
+    prefixes: [Linking.createURL("/")],
+    config: {
+      screens: {
+        Welcome: "welcome",
+        Menu: "menu",
+        Cart: "cart",
+        CategoryDetails: "/:category",
+        Item: "/:categoryName/:itemId",
+      },
+    },
+  }
+
   return (
     <ThemeProvider value={{ themeScheme, setThemeContextOverride }}>
-      <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
+      <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props} linking={linking}>
         <Screens.ErrorBoundary catchErrors={Config.catchErrors}>
           <AppStack />
         </Screens.ErrorBoundary>
