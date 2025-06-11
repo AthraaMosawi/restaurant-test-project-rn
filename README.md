@@ -1,6 +1,6 @@
 # Good Food App
 
-A mobile food ordering application built with React Native, allowing users to browse food categories, view detailed menu items, and manage a shopping cart with persistent data.
+A mobile food ordering application built with React Native, allowing users to browse food categories, view detailed menu items, and manage a menu cart with persistent data.
 
 ### Features
 
